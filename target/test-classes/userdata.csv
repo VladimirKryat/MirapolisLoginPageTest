@@ -1,2 +1,7 @@
-  login    ,  password
-fominaelena,  1P73BP4Z
+# empty - ключевое слово для передачи пустого значения в параметр (обрабатывается в changeParams)
+  login       ,  password  ,   expectedFullName                 ,     CorrectUserData
+fominaelena   ,  1P73BP4Z  ,   Фомина Елена Сергеевна           ,     true
+kryatvladimir ,  myPass97  ,   Неверные данные для авторизации  ,     false
+fominaelena   ,  empty     ,   Неверные данные для авторизации  ,     false
+empty         ,  empty     ,   Неверные данные для авторизации  ,     false
+empty         ,  1P73BP4Z  ,   Неверные данные для авторизации  ,     false

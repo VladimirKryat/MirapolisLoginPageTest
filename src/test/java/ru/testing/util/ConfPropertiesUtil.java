@@ -13,7 +13,7 @@ import java.util.Properties;
 * ConfProperties позволяет загрузить параметры из файла conf.properties
 * getProperty возвращает параметр по ключу(имени), в случае если параметр не найден логируется предупреждение и возвращается null;
 * */
-public class ConfPropertiesUtil {
+public final class ConfPropertiesUtil {
     private static Logger logger = LoggerFactory.getLogger(ConfPropertiesUtil.class);
     private static Properties PROPERTIES;
     static{
