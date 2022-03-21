@@ -50,10 +50,10 @@ public class LoginPageTest {
             ignoreLeadingAndTrailingWhitespace = true           //удаляем пробелы перед и после значением
     )
     public void loginTest(String login, String password, String expectedResult, boolean isCorrectData) {
+        logger.trace("Start loginTest");
         login = ChangeParamsUtil.changeParams(login);
         password = ChangeParamsUtil.changeParams(password);
         expectedResult = ChangeParamsUtil.changeParams(expectedResult);
-        logger.trace("Start loginTest");
         //проверяем страницу на соответствие LoginPage
         Assertions.assertTrue(loginPage.isCorrectPageByTitle() || loginPage.isCorrectPageByKeyElement());
         loginPage.loginAs(login, password);
@@ -66,7 +66,10 @@ public class LoginPageTest {
             Assertions.assertTrue(loginPage.isCorrectPageByTitle() || loginPage.isCorrectPageByKeyElement());
         } else {
             Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.alertIsPresent());
-            Assertions.assertTrue(alert.getText().contains(expectedResult));
+
+            // Данный тест падает, потому как alert выдаёт разные сообщения при разных данных.
+            //либо принять это как баг, либо изменить equals на contains
+            Assertions.assertTrue(alert.getText().equals(expectedResult));
             alert.accept();
         }
     }
@@ -78,6 +81,7 @@ public class LoginPageTest {
     @ParameterizedTest
     @CsvSource({"fominaelena,  1P73BP4Z , Фомина Елена Сергеевна"})
     public void showPasswordTest(String login, String password, String expectedFullName) {
+        logger.trace("Start showPasswordTest");
         loginPage.setLoginInput(login);
         loginPage.setPasswordInput(password);
         //устанавливаем отображение символов пароля
