@@ -17,8 +17,7 @@ public class LoginPage extends Page {
     private WebElement submitBtn;
 
     public LoginPage(WebDriver driver) {
-        super(driver, "Авторизация");
-        setKeyLocator(By.xpath("//div[contains(@class,\"info-title\") and *[contains(text(),\"Вход\")]]"));
+        super(driver, "Авторизация", By.xpath("//div[contains(@class,\"info-title\") and *[contains(text(),\"Вход\")]]"));
     }
 
     public void loginAs(String login, String password){
@@ -28,15 +27,15 @@ public class LoginPage extends Page {
     }
 
     public void setLoginInput(String login) {
-        loginInput.sendKeys(login);
+        elementSetText(loginInput,login);
     }
 
     public void setPasswordInput(String password) {
-        passwordInput.sendKeys(password);
+        elementSetText(passwordInput,password);
     }
 
     public void submitBtnClick() {
-        submitBtn.click();
+        elementClick(submitBtn);
     }
 
     //устанавливаем видимость символов пароля
@@ -51,7 +50,7 @@ public class LoginPage extends Page {
                 || (passwordInput.getAttribute("type").equals("text") && isVisible)) {
             return;
         }
-        showPasswordBtn.click();
+        elementClick(showPasswordBtn);
     }
 
     public String getLoginInputAttribute(String attributeName){

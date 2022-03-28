@@ -16,10 +16,11 @@ public abstract class Page {
     //для вспомогательной проверки по элементу
     private By keyLocator;
     private WebDriver driver;
-    public Page(WebDriver driver, String title){
+    public Page(WebDriver driver, String title, By keyLocator){
         PageFactory.initElements(driver,this);
         this.driver=driver;
         TITLE_PAGE=title;
+        this.keyLocator = keyLocator;
     }
     //проверяем title страницы
     public boolean isCorrectPageByTitle(){
@@ -28,6 +29,7 @@ public abstract class Page {
     }
     //ожидаем элемент
     public boolean isCorrectPageByKeyElement(){
+        if (keyLocator==null) return false;
         return new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfElementLocated(keyLocator))!=null;
     }
 
@@ -35,7 +37,14 @@ public abstract class Page {
         return driver;
     }
 
-    public void setKeyLocator(By keyLocator) {
-        this.keyLocator = keyLocator;
+    //ожидаем возможности кликнуть элемент и кликаем
+    protected void elementClick(WebElement element){
+        new WebDriverWait(getDriver(), Duration.ofSeconds(5L))
+                .until(ExpectedConditions.elementToBeClickable(element))
+                .click();
+    }
+    protected void elementSetText(WebElement element, String text){
+        element.clear();
+        element.sendKeys(text);
     }
 }

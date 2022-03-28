@@ -1,0 +1,8 @@
+ru/testing/util/DriverSetupUtil.class
+ru/testing/MainTestLauncher.class
+ru/testing/test/LoginPageTest.class
+ru/testing/util/ChangeParamsUtil.class
+ru/testing/page/Page.class
+ru/testing/page/LoginPage.class
+ru/testing/page/MainPage.class
+ru/testing/util/ConfPropertiesUtil.class

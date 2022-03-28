@@ -2,6 +2,7 @@ package ru.testing.util;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 
@@ -16,10 +17,11 @@ public final class DriverSetupUtil {
 
     public static WebDriver getDriver() {
         WebDriver driver = new ChromeDriver();
+//        WebDriver driver = new FirefoxDriver();
         //устанавливаем размер окна
         driver.manage().window().maximize();
-        //настраиваем неявное ожидание элементов на 5 секунд
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5L));
+        //настраиваем неявное ожидание элементов на 10 секунд
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
         return driver;
     }
 }
