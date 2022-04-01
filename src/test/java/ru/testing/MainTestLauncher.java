@@ -15,6 +15,6 @@ public class MainTestLauncher {
                 .request()
                 .selectors(DiscoverySelectors.selectPackage("ru.testing.test"))
                 .build();
-        launcher.execute(request,summaryGeneratingListener);
+        launcher.execute(request, summaryGeneratingListener);
     }
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ru.testing.test.LoginPageTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.545 s - in ru.testing.test.LoginPageTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.982 s - in ru.testing.test.LoginPageTest

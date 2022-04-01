@@ -9,31 +9,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class MainPage extends Page{
+public class MainPage extends Page {
     @FindBy(xpath = "//div[contains(@class,\"full-name\")]")
-    WebElement fullNameDiv;
+    private WebElement fullNameDiv;
     @FindBy(xpath = "//div[@class=\"mira-user-info-logout\"]")
-    WebElement logoutBtn;
+    private WebElement logoutBtn;
     //локатор для сообщения о загрузке
-    By loadingMessageLocator=By.xpath("//div [contains(@class,\"loading\") and *[contains(text(),\"Загружаем\")]]");
+    private final By loadingMessageLocator = By.xpath("//div [contains(@class,\"loading\") and *[contains(text(),\"Загружаем\")]]");
+    private final By keyElement = By.xpath("//span[contains(@class,\"mira-label-text\") and text()=\"Главная страница\"]");
+    private final String titlePage = "Главная страница";
 
-    public MainPage(WebDriver driver){
-        super(driver, "Главная страница",By.xpath("//span[contains(@class,\"mira-label-text\") and text()=\"Главная страница\"]"));
+    public MainPage(WebDriver driver) {
+        super(driver);
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return fullNameDiv.getText();
     }
-    public void dropDownContainerClick(){
+
+    public void dropDownContainerClick() {
         //дополнительно настроим ожидание исчезновения сообщения о загрузке
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10L));
         Boolean result = wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingMessageLocator));
         elementClick(fullNameDiv);
     }
-    public void logoutBtnClick(){
+
+    public void logoutBtnClick() {
         elementClick(logoutBtn);
     }
-    public void logout(){
+
+    public void logout() {
         dropDownContainerClick();
         logoutBtnClick();
     }

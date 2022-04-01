@@ -15,50 +15,51 @@ public class LoginPage extends Page {
     private WebElement showPasswordBtn;
     @FindBy(xpath = "//button[@id=\"button_submit_login_form\"]")
     private WebElement submitBtn;
+    private final By keyElement = By.xpath("//div[contains(@class,\"info-title\") and *[contains(text(),\"Вход\")]]");
+    private final String titlePage = "Авторизация";
 
     public LoginPage(WebDriver driver) {
-        super(driver, "Авторизация", By.xpath("//div[contains(@class,\"info-title\") and *[contains(text(),\"Вход\")]]"));
+        super(driver);
     }
 
-    public void loginAs(String login, String password){
+    public MainPage loginAs(String login, String password) {
         setLoginInput(login);
         setPasswordInput(password);
-        submitBtnClick();
+        return submitBtnClick();
     }
 
     public void setLoginInput(String login) {
-        elementSetText(loginInput,login);
+        elementSetText(loginInput, login);
     }
 
     public void setPasswordInput(String password) {
-        elementSetText(passwordInput,password);
+        elementSetText(passwordInput, password);
     }
 
-    public void submitBtnClick() {
+    public MainPage submitBtnClick() {
         elementClick(submitBtn);
+        return new MainPage(getDriver());
     }
 
-    //устанавливаем видимость символов пароля
+    //    устанавливаем видимость символов пароля
     public void setShowPasswordBtn(boolean isVisible) {
-        /*
-        Кликнуть на кнопку нужно когда тип кнопки не соответствует видимости элемента
-        Возвращаемся из метода когда:
-                  если тип данных в поле passwordInput - password и видимость установлена в false
-                  если тип данных text и видимость true
-                   */
-        if ((passwordInput.getAttribute("type").equals("password") && !isVisible)
-                || (passwordInput.getAttribute("type").equals("text") && isVisible)) {
+//        Кликнуть на кнопку нужно когда тип кнопки не соответствует видимости элемента
+//        Возвращаемся из метода когда:
+//                  если тип данных в поле passwordInput - password и видимость установлена в false
+//                  если тип данных text и видимость true
+        String valueTypeAttribute = passwordInput.getAttribute("type");
+        if ((valueTypeAttribute.equals("password") && !isVisible)
+                || (valueTypeAttribute.equals("text") && isVisible)) {
             return;
         }
         elementClick(showPasswordBtn);
     }
 
-    public String getLoginInputAttribute(String attributeName){
+    public String getLoginInputAttribute(String attributeName) {
         return loginInput.getAttribute(attributeName);
     }
 
-    public String getPasswordAttribute(String attributeName){
+    public String getPasswordInputAttribute(String attributeName) {
         return passwordInput.getAttribute(attributeName);
     }
-
 }
